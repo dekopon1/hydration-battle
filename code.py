@@ -7,6 +7,14 @@ import busio
 import digitalio
 import adafruit_ssd1306
 
+# ─── GeeekPi/52Pi Breadboard Kit Compatibility ───────────────────
+# The GeeekPi EP-0164 board has an onboard buzzer whose BEEP pin floats
+# by default, causing it to scream on power-up. Drive GP13 LOW immediately
+# to silence it before anything else runs.
+_buzzer_silence = digitalio.DigitalInOut(board.GP13)
+_buzzer_silence.direction = digitalio.Direction.OUTPUT
+_buzzer_silence.value = False
+
 import config
 from score_tracker import ScoreTracker
 from display_manager import DisplayManager
