@@ -45,6 +45,12 @@ Each button has two terminals:
 
 The code uses the Pico's internal pull-up resistors, so no external resistors are needed.
 
+> **💡 Connector tip:** Check your button's microswitch terminal size before buying connectors — it varies by brand:
+> - **Sanwa / EG STARTS style** (most Amazon buttons) → **2.8mm (0.110")** quick-connect terminals
+> - **Adafruit / HAPP style** → **4.8mm (0.187")** quick-connect terminals
+>
+> Pre-made wire pairs with connectors already attached are the easiest option — no crimping tool needed.
+
 ### OLED Wiring Detail
 The OLED has 4 pins:
 | OLED Pin | Pico Pin |
