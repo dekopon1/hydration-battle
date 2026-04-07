@@ -74,7 +74,9 @@ The OLED has 4 pins:
 3. From the `lib/` folder in the bundle, copy these files to the `CIRCUITPY/lib/` folder on your Pico:
    - `adafruit_ssd1306.mpy`
    - `adafruit_framebuf.mpy`
-4. That's it — just two library files!
+4. From the **root** of the bundle (not the `lib/` folder), copy this file to the **root** of your CIRCUITPY drive:
+   - `font5x8.bin`
+5. That's it — two library files and one font file!
 
 ### Step 3: Copy the Code
 
