@@ -47,6 +47,14 @@ class ScoreTracker:
         self.daily[2] = 0
         self._save()
 
+    def reset_alltime(self):
+        """Reset all-time scores and daily scores."""
+        self.daily[1] = 0
+        self.daily[2] = 0
+        self.alltime[1] = 0
+        self.alltime[2] = 0
+        self._save()
+
     def _save(self):
         """Persist scores to flash as JSON."""
         data = {

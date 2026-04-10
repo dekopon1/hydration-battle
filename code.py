@@ -61,6 +61,7 @@ idle_last_switch = time.monotonic()
 btn1_was_pressed = False
 btn2_was_pressed = False
 both_held_start = None
+daily_reset_done = False
 
 # ─── Splash Screen ──────────────────────────────────────────────
 
@@ -106,6 +107,19 @@ def handle_daily_reset():
 
     scores.reset_daily()
     animator.daily_reset()
+    display.draw_alltime_reset_warning()  # Hint to keep holding for all-time reset
+    last_activity = time.monotonic()
+    idle_showing_alltime = False
+
+
+def handle_alltime_reset():
+    """Reset all-time scores when both buttons held for ALLTIME_RESET_HOLD_TIME."""
+    global last_activity, idle_showing_alltime
+
+    scores.reset_alltime()
+    animator.daily_reset()
+    display.draw_alltime_reset_confirmation()
+    time.sleep(2)
     display.draw_daily_scoreboard(scores)
     last_activity = time.monotonic()
     idle_showing_alltime = False
@@ -122,13 +136,24 @@ while True:
     if b1 and b2:
         if both_held_start is None:
             both_held_start = now
-        elif now - both_held_start >= config.RESET_HOLD_TIME:
-            handle_daily_reset()
+        held_time = now - both_held_start
+
+        if daily_reset_done and held_time >= config.ALLTIME_RESET_HOLD_TIME:
+            # Held long enough for all-time reset
+            handle_alltime_reset()
             both_held_start = None
-            # Wait for release
+            daily_reset_done = False
             while is_pressed(btn1) or is_pressed(btn2):
                 time.sleep(0.05)
+        elif not daily_reset_done and held_time >= config.RESET_HOLD_TIME:
+            # Held long enough for daily reset — hint to keep holding
+            handle_daily_reset()
+            daily_reset_done = True
     else:
+        if daily_reset_done:
+            # Released after daily reset but before all-time — go back to scoreboard
+            display.draw_daily_scoreboard(scores)
+        daily_reset_done = False
         both_held_start = None
 
         # --- Single button press (with debounce) ---

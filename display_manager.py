@@ -183,6 +183,26 @@ class DisplayManager:
         self._draw_bitmap(WATER_DROP, 60, 44)
         self.show()
 
+    def draw_alltime_reset_warning(self):
+        """Shown after daily reset to hint that all-time reset is available."""
+        self.clear()
+        self.display.text("DAILY RESET!", 20, 4, 1)
+        for x in range(self.width):
+            self.display.pixel(x, 14, 1)
+        self.display.text("Keep holding", 16, 20, 1)
+        self.display.text("for ALL-TIME", 16, 32, 1)
+        self.display.text("reset...", 32, 44, 1)
+        self.show()
+
+    def draw_alltime_reset_confirmation(self):
+        """Show confirmation that all-time scores were reset."""
+        self.clear()
+        self.display.text("ALL-TIME", 28, 12, 1)
+        self.display.text("SCORES", 36, 24, 1)
+        self.display.text("RESET!", 40, 36, 1)
+        self._draw_bitmap(WATER_DROP, 60, 50)
+        self.show()
+
     def draw_splash_screen(self):
         """Show the startup splash screen."""
         self.clear()

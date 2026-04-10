@@ -23,7 +23,8 @@ DISPLAY_I2C_ADDR = 0x3C
 IDLE_TIMEOUT = 10       # Seconds before idle screen cycling starts
 IDLE_CYCLE_INTERVAL = 5 # Seconds between screen switches in idle mode
 ANIMATION_DURATION = 0.8 # How long button-press animations last
-RESET_HOLD_TIME = 3     # Hold both buttons this long to reset daily scores
+RESET_HOLD_TIME = 3          # Hold both buttons this long to reset daily scores
+ALLTIME_RESET_HOLD_TIME = 10 # Keep holding this long to also reset all-time scores
 
 # --- Save File ---
 SAVE_FILE = "/scores.json"
